@@ -19,32 +19,16 @@ public class MemberController {
 
     @GetMapping
     public List<Member> getAllUsers() {
-
-        Member users = new Member(0,"cahenl");
-
-        Member users1 = new Member(1,"bob");
-
-        Member users2 = new Member(2,"coen");
-
-//        System.out.println(" -->" + users2 + users1 +  users);
-        userRepository.save(users);
-        userRepository.save(users1);
-        userRepository.save(users2);
-
         return userRepository.findAll();
     }
 
     @GetMapping("/{user_id}")
     public Optional<Member> getUserById(@PathVariable("user_id") int id) {
-        Optional<Member> user = userRepository.findById(id);
         return userRepository.findById(id);
     }
 
     @PostMapping
     public String saveUserEntity(@RequestBody Member user) {
-        Member user1 = new Member();
-        user1.setName(user.getName());
-
         userRepository.save(user);
         return "Save User Successfully!";
     }
